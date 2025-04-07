@@ -19,6 +19,9 @@ module.exports = function (app) {
     router.route("/")
         .get([
             controller.index,
+            viewHelper.filter,
+            viewHelper.sort,
+            viewHelper.paginate,
             viewHelper.renderArticles
         ])
 

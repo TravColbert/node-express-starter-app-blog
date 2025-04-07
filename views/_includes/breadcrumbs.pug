@@ -1,0 +1,9 @@
+if breadcrumbs && breadcrumbs.length
+  nav.aria-label="breadcrumb"
+    ol.breadcrumb
+      each crumb, index in breadcrumbs
+        if index === breadcrumbs.length - 1
+          li.breadcrumb-item.active(aria-current="page")= crumb.text
+        else
+          li.breadcrumb-item
+            a(href=crumb.href)= crumb.text

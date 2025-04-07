@@ -1,0 +1,12 @@
+extends ../layout-default.pug
+
+block content
+    h1 500 - Internal Server Error
+    p Something went wrong on our end.
+    p Our team has been notified and we're working to fix the issue.
+    if error
+        .error-details
+            h2 Error Details
+            h3= error.message
+            pre= error.stack
+    p Please try again later or contact support if the problem persists.

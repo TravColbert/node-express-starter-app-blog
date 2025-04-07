@@ -1,0 +1,10 @@
+extends ../layout-default.pug
+
+block content
+    h1= article.metadata.title
+    .article
+      h2= article.metadata.blurb
+      .content !{article.content}
+    .navigation
+        a(href="/articles") Back to articles
+

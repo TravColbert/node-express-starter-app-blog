@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+  include _includes/head.pug
+  body
+    include _includes/header.pug
+    .container
+      .page-header
+        include _includes/breadcrumbs.pug
+        include _includes/flashes.pug
+      .page-main
+        block main
+      .messages
+        include _includes/messages.pug
+      .content
+        block content
+    include _includes/footer.pug
+    include _includes/foot.pug

@@ -1,0 +1,4 @@
+if flashes && flashes.length
+  each flash in flashes
+    .alert(class=`alert-${flash.type || 'info'}` role="alert")
+      = flash.message

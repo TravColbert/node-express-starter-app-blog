@@ -1,0 +1,8 @@
+.footer
+    if footer && footer.navigation
+        .navigation
+            ul.nav
+                each item in footer.navigation
+                    li.nav-item
+                        a.nav-link(href=item.href)= item.text
+    block footer

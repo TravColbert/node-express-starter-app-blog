@@ -7,18 +7,13 @@ module.exports = function (app) {
   app.locals.debug && console.debug(`Loading ${currentControllerName} controller`)
 
   return {
-    index: function (req, res) {
-      const articlesCollection = app.locals.models[currentControllerName].all()
-      res.render('articles/index', { articles: articlesCollection })
+    index: function (req, res, next) {
+      res.locals.articles = app.locals.models[currentControllerName].all()
+      return next()
     },
-    show: function (req, res) {
-      const article = app.locals.models[currentControllerName].find(req.params.id)
-
-      if (article) {
-        return res.render('articles/show', { article })
-      }
-
-      res.status(404).render('errors/404')
+    show: function (req, res, next) {
+      res.locals.article = app.locals.models[currentControllerName].find(req.params.id)
+      return next()
     }
   }
 }

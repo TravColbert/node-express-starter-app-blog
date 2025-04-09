@@ -14,6 +14,24 @@ const isMarkdown = function (article) {
 }
 
 module.exports = {
+  compileMainNavigation: function (req, res, next) {
+    res.locals.mainNavigation = res.locals.articles.map(article => {
+      return {
+        id: article.id,
+        title: article.title,
+        url: `/articles/${article.id}`,
+        selected: (res.locals.article.metadata.id === article.id)
+      }
+    })
+    return next()
+  },
+  compileSubNavigation: function (req, res, next) {
+    if (!res.locals.article) {
+      return next()
+    }
+    res.locals.subNavigation = []
+    return next()
+  },
   filter: function (req, res, next) {
     const tag = req.query.tag
 
@@ -59,7 +77,7 @@ module.exports = {
     if (!res.locals.articles) {
       return res.status(404).render('errors/404')
     }
-    return res.render('articles/index', { articles: res.locals.articles })
+    return res.render('articles/index', { articles: res.locals.articles, mainNavigation: res.locals.mainNavigation, subNavigation: res.locals.subNavigation })
   },
   sort: function (req, res, next) {
     const sortBy = req.query.sort_by || 'createdAt'

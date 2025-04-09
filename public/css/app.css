@@ -1,0 +1,179 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fafafa;
+}
+
+/* Header & Navigation */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #eaeaea;
+  z-index: 1000;
+  padding: 1rem 2rem;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+nav li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+nav li a:hover {
+  color: #666;
+}
+
+/* Main content */
+main {
+  margin-top: 4rem;
+  /* Space for fixed header */
+  min-height: calc(100vh - 8rem);
+  /* Subtract header and footer heights */
+}
+
+/* Split layout for desktop */
+@media (min-width: 768px) {
+  main {
+    display: flex;
+  }
+
+  section {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 8rem);
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  section::-webkit-scrollbar {
+    display: none;
+  }
+
+  aside {
+    flex: 1;
+    padding: 2rem;
+    position: sticky;
+    top: 4rem;
+    /* Same as margin-top of main */
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 767px) {
+
+  section,
+  aside {
+    padding: 1.5rem;
+  }
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+/* Article styles */
+article {
+  margin-bottom: 3rem;
+}
+
+article h2 {
+  margin-bottom: 0.5rem;
+}
+
+article time {
+  display: block;
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+article p {
+  margin-bottom: 1rem;
+}
+
+article .read-more {
+  display: inline-block;
+  color: #555;
+  text-decoration: none;
+  border-bottom: 1px solid #555;
+  transition: all 0.2s;
+}
+
+article .read-more:hover {
+  color: #222;
+  border-color: #222;
+}
+
+/* Footer */
+footer {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+footer ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+footer a {
+  color: #666;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #333;
+}
+
+/* Utility classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}

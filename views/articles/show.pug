@@ -1,10 +1,14 @@
 extends ../layout-default.pug
 
 block content
-    h1= article.metadata.title
-    .article
-      h2= article.metadata.blurb
-      .content !{article.content}
+  .content  !{article.content}
     .navigation
-        a(href="/articles") Back to articles
+      a(href="/articles") Back to articles
+
+block meta
+  h2= article.metadata.title
+  h3= article.metadata.blurb
+  p
+    | Published on 
+    span= article.metadata.createdAt
 

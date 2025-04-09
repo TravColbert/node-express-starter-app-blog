@@ -2,15 +2,19 @@ doctype html
 html(lang="en")
   include _includes/head.pug
   body
-    include _includes/header.pug
-    .container
-      .page-header
-        include _includes/breadcrumbs.pug
-        include _includes/flashes.pug
-      .page-main
+    header 
+      include _includes/header.pug
+      //- include _includes/breadcrumbs.pug
+    main
+      aside
+        block meta
+      section 
         .messages
           include _includes/messages.pug
-        .main
-          block content
-    include _includes/footer.pug
+        .flashes
+          include _includes/flashes.pug
+        article
+          block content 
+    footer
+      include _includes/footer.pug
     include _includes/foot.pug

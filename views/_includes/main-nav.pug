@@ -1,0 +1,5 @@
+ul 
+  if mainNavigation 
+    each item in mainNavigation
+      li(class=item.selected ? 'selected' : '')
+        a(href=item.url) #{item.title}

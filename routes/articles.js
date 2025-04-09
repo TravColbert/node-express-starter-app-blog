@@ -13,6 +13,8 @@ module.exports = function (app) {
         .get([
             controller.show,
             viewHelper.parseArticle,
+            viewHelper.compileMainNavigation,
+            viewHelper.compileSubNavigation,
             viewHelper.renderArticle
         ])
 

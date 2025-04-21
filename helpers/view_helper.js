@@ -20,7 +20,7 @@ module.exports = {
         id: article.id,
         title: article.title,
         url: `/articles/${article.id}`,
-        selected: (res.locals.article.metadata.id === article.id)
+        selected: (res.locals.article?.metadata?.id === article.id)
       }
     })
     return next()
@@ -77,7 +77,30 @@ module.exports = {
     if (!res.locals.articles) {
       return res.status(404).render('errors/404')
     }
-    return res.render('articles/index', { articles: res.locals.articles, mainNavigation: res.locals.mainNavigation, subNavigation: res.locals.subNavigation })
+
+    const indexRenderObject = {
+      articles: res.locals.articles,
+      mainNavigation: res.locals.mainNavigation,
+      subNavigation: res.locals.subNavigation,
+      title: 'Articles',
+    }
+
+    return res.render('articles/index', indexRenderObject)
+  },
+  renderLatest: function (req, res) {
+    if (!res.locals.articles || !res.locals.article) {
+      return res.status(404).render('errors/404')
+    }
+
+    const indexRenderObject = {
+      article: res.locals.article,
+      articles: res.locals.articles,
+      mainNavigation: res.locals.mainNavigation,
+      subNavigation: res.locals.subNavigation,
+      title: 'Latest Articles',
+    }
+
+    return res.render('articles/latest', indexRenderObject)
   },
   sort: function (req, res, next) {
     const sortBy = req.query.sort_by || 'createdAt'

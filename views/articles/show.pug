@@ -1,14 +1,23 @@
 extends ../layout-default.pug
 
-block content
-  .content  !{article.content}
-    .navigation
-      a(href="/articles") Back to articles
-
 block meta
-  h2= article.metadata.title
-  h3= article.metadata.blurb
-  p
-    | Published on 
-    span= article.metadata.createdAt
+  h2.shadowed
+    a(href="#")= article.metadata.title
+  .meta
+    if article.metadata.publishedAt
+      .published-at
+        span= article.metadata.publishedAt
+    if article.metadata.tags
+      nav 
+        ul
+          for tag in article.metadata.tags
+            li 
+              | # 
+              a(href=`/articles/tag/${tag}`) #{tag}
+  //- if article.metadata.coverImage 
+  //-   img.cover-image(src=`/images/${article.metadata.coverImage}`, alt=article.metadata.title)
 
+block content
+  .content !{article.content}
+  nav
+    a(href="/articles") Back to articles

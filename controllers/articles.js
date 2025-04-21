@@ -12,7 +12,12 @@ module.exports = function (app) {
       return next()
     },
     show: function (req, res, next) {
-      res.locals.article = app.locals.models[currentControllerName].find(req.params.id)
+      if (req.params.id) {
+        res.locals.article = app.locals.models[currentControllerName].find(req.params.id)
+      } else {
+        console.debug(`No article ID provided - getting latest article`)
+        res.locals.article = app.locals.models[currentControllerName].last()
+      }
       res.locals.articles = app.locals.models[currentControllerName].all()
       return next()
     }

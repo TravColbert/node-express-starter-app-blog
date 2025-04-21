@@ -1,15 +1,30 @@
 extends ../layout-default.pug
 
-block content
-    if errors
-        .alert.alert-danger
-            each error in errors
-                p= error.message
-    ul
-        each article in articles
-            li
-                a(href=`/articles/${article.id}`)= article.title
+block articleMeta
+  if title 
+    h2.shadowed= title
 
-block meta
-    - var pageTitle = articles.length === 1 ? 'Article' : 'Articles'
-    h1= pageTitle
+  if errors
+    .alert.alert-danger
+      each error in errors
+        p= error.message
+  if coverImage 
+    img.cover-image(src=`/images/${coverImage}`)
+
+block content
+  ul.articles-list
+    each article in articles
+      li.article-item
+        h3.article
+          a(href=`/articles/${article.id}`).article-title= article.title
+        .meta                
+          if article.publishedAt 
+            span.published-at= article.publishedAt
+          if article.tags
+            ul.article-tags
+              for tag in article.tags
+                li 
+                  | # 
+                  a(href=`/articles/tag/${tag}`) #{tag}
+        if article.blurb
+          p.blurb= article.blurb

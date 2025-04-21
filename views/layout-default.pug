@@ -1,20 +1,28 @@
 doctype html
 html(lang="en")
   include _includes/head.pug
-  body
-    header 
+  body.layout
+    header
       include _includes/header.pug
       //- include _includes/breadcrumbs.pug
-    main
-      aside
-        block meta
-      section 
-        .messages
-          include _includes/messages.pug
-        .flashes
-          include _includes/flashes.pug
+    main.main
+      section.section
+        header 
+          block sectionHeader
+          block meta
+          if messages
+            .messages
+              include _includes/messages.pug
+          if flashes
+            .flashes
+              include _includes/flashes.pug
+        aside 
+          block aside
         article
-          block content 
-    footer
+          header 
+            block articleMeta
+          .content
+            block content
+    footer.footer
       include _includes/footer.pug
-    include _includes/foot.pug
+  include _includes/foot.pug

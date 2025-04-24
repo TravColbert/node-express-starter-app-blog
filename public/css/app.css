@@ -1,3 +1,302 @@
+:root {
+  --color-foreground: hsla(35, 17%, 34%, 1);
+  --color-background: hsla(0, 0%, 96%, 1);
+  --color-accent-primary: hsla(153, 100%, 61%, 1);
+  --color-accent-secondary: hsla(180, 6%, 41%, 1);
+  --color-accent-tertiary: hsla(190, 13%, 73%, 1);
+
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+
+
+  --body-font-family: 'Source Code Pro', monospace, 'Source Sans Pro', sans-serif;
+
+  --body-font-size: 18px;
+  --body-font-size-secondary: 16px;
+  --body-font-size-tertiary: 14px;
+
+  --body-line-height: 1.6;
+  --body-line-height-secondary: 1.4;
+  --body-line-height-tertiary: 1.2;
+
+  --article-line-padding: 1.5rem;
+
+  --body-hr-font-size: 22px;
+  --body-hr-line-height: 1.6;
+
+  --body-radius: 1.5rem;
+
+  --body-padding: 1.5rem;
+  --body-hr-padding: 2rem;
+}
+
+/* layout Setup */
+body {
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size);
+  line-height: var(--body-line-height);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+320px: Small mobile devices (e.g., iPhone SE).
+480px: Larger mobile devices.
+768px: Tablets (e.g., iPads in portrait mode).
+1024px: Small laptops or tablets in landscape mode.
+1200px: Desktops or larger screens.
+1440px: High-resolution desktops or large monitors.
+1920px: Full HD screens or very large monitors.
+*/
+
+/**
+ * Body-level grid layout
+ */
+.layout {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  display: grid;
+  grid:
+    ". header ." 2rem ". main ." 1fr ". footer ." 2rem / auto 1024px auto;
+  gap: 0;
+}
+
+.layout>* {
+  padding: 0 var(--body-padding);
+}
+
+body>header {
+  grid-area: header;
+  font-size: larger;
+}
+
+body>main {
+  grid-area: main;
+}
+
+body>footer {
+  grid-area: footer;
+}
+
+body>header,
+body>footer {
+  display: flex;
+  flex-direction: row;
+}
+
+/**
+ * For 404's and error pages
+ */
+.centered-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}
+
+.centered-layout h1 {
+  font-size: 50px;
+  line-height: var(--body-hr-line-height);
+  margin-bottom: var(--body-hr-padding);
+}
+
+/**
+ * Section grid layout
+ */
+.section-layout {
+  display: grid;
+  grid:
+    "section-header section-header" auto "article aside" 1fr / 1fr 300px;
+  gap: var(--body-padding);
+}
+
+section>header {
+  grid-area: section-header;
+}
+
+section>article {
+  grid-area: article;
+}
+
+section>aside {
+  grid-area: aside;
+}
+
 img {
   display: none;
+}
+
+.masthead {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+body>header nav,
+body>footer nav {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body>header nav ul,
+body>footer nav ul {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+body>header nav ul li,
+body>footer nav ul li {
+  margin-right: var(--body-padding);
+  list-style: none;
+}
+
+body>header nav ul li:last-child,
+body>footer nav ul li:last-child {
+  margin-right: 0
+}
+
+/* FOR THE ASIDE PAGE ELEMENT */
+aside {
+  border-left: 1px solid var(--timberwolf);
+  padding: 0 0 0 var(--body-padding);
+}
+
+aside .article-item {
+  padding: 0;
+}
+
+aside .article-item:first-child {
+  padding-top: 0;
+}
+
+aside .article-item:last-child {
+  border-bottom: none;
+}
+
+/* ARTICLE FORMATTING */
+.article-item {
+  margin: 0;
+  margin-bottom: var(--body-padding);
+}
+
+.article-item .article-title {
+  font-size: var(--body-font-size-secondary);
+  line-height: var(--body-line-height-tertiary);
+}
+
+article header {
+  border-bottom: 1px dotted var(--dim-gray);
+  margin-bottom: var(--body-padding);
+}
+
+.meta {
+  font-size: var(--body-font-size-tertiary);
+  line-height: var(--body-line-height-tertiary);
+}
+
+.tags {
+  margin-bottom: var(--body-padding);
+}
+
+.article-tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: var(--body-font-size-tertiary);
+}
+
+.article-tag:not(:last-child) {
+  padding: 0 0.5rem 0 0;
+}
+
+article .content * {
+  margin-bottom: var(--article-line-padding);
+}
+
+article .content h1,
+article .content h2 {
+  font-weight: 800;
+}
+
+article .content h3,
+article .content h4 {
+  font-weight: 600;
+}
+
+article .content ul,
+article .content ol {
+  list-style-position: inside;
+  padding-left: var(--body-padding);
+}
+
+article .content ul {
+  list-style-type: disc;
+}
+
+article .content ol {
+  list-style-type: decimal;
+}
+
+article .content em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+article .content strong {
+  font-weight: 600;
+}
+
+article .content pre {
+  background-color: var(--color-accent-secondary);
+  border-radius: 8px;
+  color: var(--color-background);
+  max-width: 100%;
+  overflow-x: auto;
+  width: 100%;
+  white-space: pre;
+}
+
+p>code,
+li>code,
+dd>code,
+td>code {
+  background: #ffeff0;
+  word-wrap: break-word;
+  box-decoration-break: clone;
+  padding: .1rem .3rem .2rem;
+  border-radius: .2rem;
+}
+
+/* pre>code {
+  display: block;
+  background: none;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  max-width: 100%;
+  min-width: 100px;
+  padding: 0;
+} */
+
+pre>code {
+  display: block;
+  background: #f1f1f1;
+  padding: 1.33em;
+  border-radius: 0.33em;
+}
+
+a {
+  text-decoration: none;
 }

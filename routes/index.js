@@ -14,6 +14,7 @@ module.exports = function (app) {
       viewHelper.parseArticle,
       viewHelper.compileMainNavigation,
       viewHelper.compileSubNavigation,
+      viewHelper.compileTagList,
       viewHelper.filter,
       viewHelper.sort,
       viewHelper.paginate,

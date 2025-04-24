@@ -13,8 +13,11 @@ module.exports = function (app) {
         .get([
             controller.show,
             viewHelper.parseArticle,
+            viewHelper.filter,
+            viewHelper.sort,
             viewHelper.compileMainNavigation,
             viewHelper.compileSubNavigation,
+            viewHelper.compileTagList,
             viewHelper.renderArticle
         ])
 
@@ -24,6 +27,7 @@ module.exports = function (app) {
             viewHelper.filter,
             viewHelper.sort,
             viewHelper.paginate,
+            viewHelper.compileTagList,
             viewHelper.renderArticles
         ])
 

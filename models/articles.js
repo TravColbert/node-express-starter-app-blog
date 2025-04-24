@@ -7,7 +7,6 @@ const articlePath = path.join(__dirname, '../', 'articles')
 
 const getArticleMetadata = function (fileName) {
   try {
-    console.debug(`Fetching metadata from article: ${fileName}`)
     const article = require(path.join(articlePath, fileName))
     article.metadata['fileName'] = path.basename(fileName, '.js')
     article.metadata['id'] = path.basename(fileName, '.js')
@@ -20,9 +19,7 @@ const getArticleMetadata = function (fileName) {
 }
 
 const getArticleFull = function (fileName) {
-  console.debug(`Fetching full article: ${fileName}`)
   try {
-    console.debug(`Fetching article: ${fileName}`)
     const article = require(path.join(articlePath, fileName))
     article.metadata['fileName'] = path.basename(fileName, '.js')
     article.metadata['id'] = path.basename(fileName, '.js')
@@ -57,7 +54,6 @@ module.exports = {
     filterFunction = filterFunction || filterPublished
     retrievalFunction = retrievalFunction || getArticleMetadata
 
-    console.debug(`Scanning article location: ${articlePath}`)
     return fs.readdirSync(articlePath)
       .filter(file => file.endsWith('.js'))
       .map(retrievalFunction)
@@ -66,7 +62,6 @@ module.exports = {
   find: function (articleName) {
     const articleFileName = path.join(articlePath, articleName + '.js')
     try {
-      console.debug(`Fetching article: ${articleFileName}`)
       const article = require(articleFileName)
       return article
     } catch (error) {
@@ -78,7 +73,6 @@ module.exports = {
    * Get the last-published article
    */
   last: function () {
-    console.debug(`Fetching last published article`)
     const articles = this.all()
     if (articles.length > 0) {
       const targetArticleId = articles.sort(sortByPublishedAtDesc)[0].id

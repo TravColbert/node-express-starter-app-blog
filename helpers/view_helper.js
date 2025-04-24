@@ -32,6 +32,29 @@ module.exports = {
     res.locals.subNavigation = []
     return next()
   },
+  compileTagList: function (req, res, next) {
+    if (!res.locals.articles || !res.locals?.articles?.length) {
+      return next()
+    }
+    try {
+      let tags = []
+      for (let article of res.locals.articles) {
+        tags = [...tags, ...article.tags]
+      }
+      tags = tags.sort((a, b) => {
+        return (a < b)
+          ? -1
+          : (a > b)
+            ? 1
+            : 0
+      })
+      res.locals.tags = [...new Set(tags)]
+      return next()
+    } catch (error) {
+      console.error(error)
+      next()
+    }
+  },
   filter: function (req, res, next) {
     const tag = req.query.tag
 
@@ -71,7 +94,12 @@ module.exports = {
     if (!res.locals.article) {
       return res.status(404).render('errors/404')
     }
-    return res.render('articles/show', { article: res.locals.article })
+    return res.render('articles/show', {
+      article: res.locals.article,
+      mainNavigation: res.locals.mainNavigation,
+      subNavigation: res.locals.subNavigation,
+      title: res.locals.title,
+    })
   },
   renderArticles: function (req, res) {
     if (!res.locals.articles) {
@@ -82,7 +110,8 @@ module.exports = {
       articles: res.locals.articles,
       mainNavigation: res.locals.mainNavigation,
       subNavigation: res.locals.subNavigation,
-      title: 'Articles',
+      tags: res.locals.tags,
+      title: res.locals.title,
     }
 
     return res.render('articles/index', indexRenderObject)
@@ -97,18 +126,27 @@ module.exports = {
       articles: res.locals.articles,
       mainNavigation: res.locals.mainNavigation,
       subNavigation: res.locals.subNavigation,
+      tags: res.locals.tags,
       title: 'Latest Articles',
     }
 
     return res.render('articles/latest', indexRenderObject)
   },
   sort: function (req, res, next) {
-    const sortBy = req.query.sort_by || 'createdAt'
+    const sortBy = req.query.sort_by || 'publishedAt'
     const sortOrder = req.query.sort_order || 'desc'
 
-    if (sortBy === 'createdAt') {
+    if (sortBy === 'publishedAt') {
       res.locals.articles.sort((a, b) => {
-        return sortOrder === 'desc' ? Date.parse(b.createdAt) - Date.parse(a.createdAt) : Date.parse(a.createdAt) - Date.parse(b.createdAt)
+        const aPublishedAt = new Date(a.publishedAt)
+        const bPublishedAt = new Date(b.publishedAt)
+        return (sortOrder === 'desc')
+          ? (aPublishedAt < bPublishedAt)
+            ? 1
+            : (aPublishedAt > bPublishedAt)
+              ? -1
+              : 0
+          : -1
       })
     } else if (sortBy === 'title') {
       res.locals.articles.sort((a, b) => {

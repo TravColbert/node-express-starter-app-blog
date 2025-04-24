@@ -8,7 +8,17 @@ module.exports = function (app) {
 
   return {
     index: function (req, res, next) {
-      res.locals.articles = app.locals.models[currentControllerName].all()
+      if (req.query.tag) {
+        res.locals.articles = app.locals.models[currentControllerName].all(
+          function (article) {
+            return article.tags && article.tags.includes(req.query.tag)
+          }
+        )
+        res.locals.title = `Articles tagged as: ${req.query.tag}' (${res.locals.articles.length})`
+      } else {
+        res.locals.articles = app.locals.models[currentControllerName].all()
+        res.locals.title = `All Articles (${res.locals.articles.length})`
+      }
       return next()
     },
     show: function (req, res, next) {

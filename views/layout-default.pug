@@ -1,3 +1,55 @@
+mixin articleTags(tags)
+  if tags
+    ul.article-tags
+      for tag in tags
+        li.article-tag
+          a(href=`/articles?tag=${tag}`) ##{tag}
+
+mixin articleList(articles)
+  .article-list 
+    nav.artile-list
+      ul.articles-list
+        each article in articles
+          li.article-item
+            h3.article
+              a(href=`/articles/${article.id}`).article-title= article.title
+            .meta                
+              if article.publishedAt 
+                span.published-at= new Date(article.publishedAt).toLocaleDateString()
+              if article.tags
+                +articleTags(article.tags)
+              if article.blurb
+                p.blurb= article.blurb
+
+mixin articleMeta(article)
+  h2.article-title
+    a(href="#")= article.metadata.title
+  .meta
+    if article.metadata.publishedAt
+      .published-at
+        span= article.metadata.publishedAt
+    if article.metadata.tags
+      nav 
+        +articleTags(article.metadata.tags)
+
+mixin articleContent(article)
+  .content !{article.content}
+  nav
+    a(href="/articles") Back to articles
+
+mixin tagList(tags)
+  if tags 
+    .tags
+      h3 Tags
+      ul.article-tags
+        li.article-tag
+          a(href="/articles") #all
+        for tag in tags 
+          li.article-tag
+            a(href=`/articles?tag=${tag}`) ##{tag}
+
+block head 
+
 doctype html
 html(lang="en")
   include _includes/head.pug
@@ -5,8 +57,8 @@ html(lang="en")
     header
       include _includes/header.pug
       //- include _includes/breadcrumbs.pug
-    main.main
-      section.section
+    main
+      section.section-layout
         header 
           block sectionHeader
           block meta
@@ -21,8 +73,7 @@ html(lang="en")
         article
           header 
             block articleMeta
-          .content
-            block content
+          block content
     footer.footer
       include _includes/footer.pug
   include _includes/foot.pug

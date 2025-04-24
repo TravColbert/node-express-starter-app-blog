@@ -10,21 +10,9 @@ block articleMeta
         p= error.message
   if coverImage 
     img.cover-image(src=`/images/${coverImage}`)
+  
+block aside 
+  +tagList(tags)
 
 block content
-  ul.articles-list
-    each article in articles
-      li.article-item
-        h3.article
-          a(href=`/articles/${article.id}`).article-title= article.title
-        .meta                
-          if article.publishedAt 
-            span.published-at= article.publishedAt
-          if article.tags
-            ul.article-tags
-              for tag in article.tags
-                li 
-                  | # 
-                  a(href=`/articles/tag/${tag}`) #{tag}
-        if article.blurb
-          p.blurb= article.blurb
+  +articleList(articles)

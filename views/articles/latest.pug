@@ -1,40 +1,11 @@
 extends ../layout-default.pug
 
 block aside 
-  nav.artile-list
-    ul.articles-list
-      each article in articles
-        li.article-item
-          h3.article
-            a(href=`/articles/${article.id}`).article-title= article.title
-          .meta                
-            if article.publishedAt 
-              span.published-at= article.publishedAt
-            if article.tags
-              ul.article-tags
-                for tag in article.tags
-                  li 
-                    | # 
-                    a(href=`/articles/tag/${tag}`) #{tag}
-          if article.blurb
-            p.blurb= article.blurb
+  +tagList(tags)
+  +articleList(articles)
 
 block articleMeta
-  h2.shadowed
-    a(href="#")= article.metadata.title
-  .meta
-    if article.metadata.publishedAt
-      .published-at
-        span= article.metadata.publishedAt
-    if article.metadata.tags
-      nav 
-        ul
-          for tag in article.metadata.tags
-            li 
-              | # 
-              a(href=`/articles/tag/${tag}`) #{tag}
-
+  +articleMeta(article)
+  
 block content
-  .content !{article.content}
-  nav
-    a(href="/articles") Back to articles
+  +articleContent(article)

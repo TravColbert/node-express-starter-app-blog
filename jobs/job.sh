@@ -1,2 +1,2 @@
 #!/bin/sh
-git clone git@gitlab.com:TravColbert/traviscolbert.net_articles.git ./node-express-starter-app-blog/articles
+git clone https://app:$1@gitlab.com/TravColbert/traviscolbert.net_articles.git ./node-express-starter-app-blog/articles

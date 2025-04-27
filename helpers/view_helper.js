@@ -15,6 +15,9 @@ const isMarkdown = function (article) {
 
 module.exports = {
   compileMainNavigation: function (req, res, next) {
+    if (!res.locals.articles || !res.locals?.articles?.length) {
+      return next()
+    }
     res.locals.mainNavigation = res.locals.articles.map(article => {
       return {
         id: article.id,
@@ -115,6 +118,20 @@ module.exports = {
     }
 
     return res.render('articles/index', indexRenderObject)
+  },
+  renderPage: function (req, res) {
+    if (!res.locals.pageToRender) {
+      return res.status(404).render('errors/404')
+    }
+
+    const indexRenderObject = {
+      mainNavigation: res.locals.mainNavigation,
+      subNavigation: res.locals.subNavigation,
+      tags: res.locals.tags,
+      title: res.locals.title,
+    }
+
+    return res.render(res.locals.pageToRender, indexRenderObject)
   },
   renderLatest: function (req, res) {
     if (!res.locals.articles || !res.locals.article) {

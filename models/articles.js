@@ -31,6 +31,10 @@ const getArticleFull = function (fileName) {
   }
 }
 
+const filterHidden = function (metadata) {
+  return (!metadata.hidden)
+}
+
 const filterPublished = function (metadata) {
   /**
    * if article.metadata.publishedAt is not defined, return false
@@ -57,6 +61,7 @@ module.exports = {
     return fs.readdirSync(articlePath)
       .filter(file => file.endsWith('.js'))
       .map(retrievalFunction)
+      .filter(filterHidden)
       .filter(filterFunction)
   },
   find: function (articleName) {

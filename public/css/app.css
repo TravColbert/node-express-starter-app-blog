@@ -140,6 +140,10 @@ img {
   font-weight: bold;
 }
 
+.masthead h1 {
+  font-size: larger;
+}
+
 body>header nav,
 body>footer nav {
   display: flex;
@@ -185,7 +189,23 @@ aside .article-item:last-child {
   border-bottom: none;
 }
 
+aside .feature {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-bottom: var(--body-padding);
+}
+
+aside .feature h3 {
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-foreground);
+}
+
 /* ARTICLE FORMATTING */
+.article-title {
+  font-size: larger;
+}
+
 .article-item {
   margin: 0;
   margin-bottom: var(--body-padding);
@@ -219,6 +239,11 @@ article header {
 
 .article-tag:not(:last-child) {
   padding: 0 0.5rem 0 0;
+}
+
+article .content {
+  display: flex;
+  flex-direction: column;
 }
 
 article .content * {

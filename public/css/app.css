@@ -88,7 +88,7 @@ body>main {
   max-width: 100%;
   display: grid;
   grid:
-    "section-header section-header" auto "article aside" 1fr / calc(var(--main-width-desktop) - (var(--aside-width-desktop) + (2 * var(--body-padding)))) var(--aside-width-desktop);
+    "section-header section-header" auto "article aside" 1fr / calc(var(--main-width-desktop) - (var(--aside-width-desktop) + (3 * var(--body-padding)))) var(--aside-width-desktop);
   gap: var(--body-padding);
 }
 
@@ -301,10 +301,6 @@ article .content pre {
   border-radius: 8px;
   color: var(--color-background);
   padding: var(--body-padding);
-  /* max-width: 100%;
-  overflow-x: scroll;
-  width: 100%;
-  white-space: pre; */
 }
 
 ul p {

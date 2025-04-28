@@ -130,6 +130,61 @@ table {
   border-spacing: 0;
 }
 
+/* CSS Reset for Pre and Code Elements */
+
+pre,
+code {
+  /* Reset font properties */
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.5;
+
+  /* Reset box model */
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  /* Reset colors */
+  color: inherit;
+  background: transparent;
+
+  /* Reset white-space handling */
+  white-space: pre;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+
+  /* Reset overflow behavior */
+  overflow: auto;
+
+  /* Reset display */
+  display: block;
+
+  /* Reset text properties */
+  text-align: left;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: normal;
+
+  /* Reset other properties */
+  box-shadow: none;
+  border-radius: 0;
+  text-shadow: none;
+  outline: none;
+}
+
+/* Specific reset for inline code elements */
+code {
+  display: inline;
+  padding: 0.1em 0.2em;
+}
+
+/* Reset for nested code in pre */
+pre code {
+  display: block;
+  padding: 0;
+}
+
 * {
   scrollbar-width: thin;
   /* "auto", "thin", or "none" */

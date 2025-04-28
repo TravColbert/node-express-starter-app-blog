@@ -57,23 +57,22 @@ html(lang="en")
     header
       include _includes/header.pug
       //- include _includes/breadcrumbs.pug
-    main
-      section.section-layout
+    main.section-layout
+      header 
+        block sectionHeader
+        block meta
+        if messages
+          .messages
+            include _includes/messages.pug
+        if flashes
+          .flashes
+            include _includes/flashes.pug
+      aside 
+        block aside
+      article
         header 
-          block sectionHeader
-          block meta
-          if messages
-            .messages
-              include _includes/messages.pug
-          if flashes
-            .flashes
-              include _includes/flashes.pug
-        aside 
-          block aside
-        article
-          header 
-            block articleMeta
-          block content
+          block articleMeta
+        block content
     footer.footer
       include _includes/footer.pug
   include _includes/foot.pug

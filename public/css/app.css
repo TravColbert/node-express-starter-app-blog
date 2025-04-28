@@ -9,6 +9,13 @@
   --animate-delay: 1s;
   --animate-repeat: 1;
 
+  --main-width-hd: 1600px;
+  --main-width-hr: 1400px;
+  --main-width-desktop: 1024px;
+  --main-width-tablet: 768px;
+  --main-width-mobile: 480px;
+
+  --aside-width-desktop: 300px;
 
   --body-font-family: 'Source Code Pro', monospace, 'Source Sans Pro', sans-serif;
 
@@ -62,8 +69,9 @@ body {
   max-height: 100vh;
   display: grid;
   grid:
-    ". header ." 2rem ". main ." 1fr ". footer ." 2rem / auto 1024px auto;
+    ". header ." 2rem ". main ." 1fr ". footer ." 2rem / auto var(--main-width-desktop) auto;
   gap: 0;
+  box-sizing: border-box;
 }
 
 .layout>* {
@@ -77,6 +85,11 @@ body>header {
 
 body>main {
   grid-area: main;
+  max-width: 100%;
+  display: grid;
+  grid:
+    "section-header section-header" auto "article aside" 1fr / calc(var(--main-width-desktop) - (var(--aside-width-desktop) + (2 * var(--body-padding)))) var(--aside-width-desktop);
+  gap: var(--body-padding);
 }
 
 body>footer {
@@ -111,21 +124,21 @@ body>footer {
  * Section grid layout
  */
 .section-layout {
-  display: grid;
+  /* display: grid;
   grid:
     "section-header section-header" auto "article aside" 1fr / 1fr 300px;
-  gap: var(--body-padding);
+  gap: var(--body-padding); */
 }
 
-section>header {
+.section-layout>header {
   grid-area: section-header;
 }
 
-section>article {
+.section-layout>article {
   grid-area: article;
 }
 
-section>aside {
+.section-layout>aside {
   grid-area: aside;
 }
 
@@ -287,10 +300,15 @@ article .content pre {
   background-color: var(--color-accent-secondary);
   border-radius: 8px;
   color: var(--color-background);
-  max-width: 100%;
-  overflow-x: auto;
+  padding: var(--body-padding);
+  /* max-width: 100%;
+  overflow-x: scroll;
   width: 100%;
-  white-space: pre;
+  white-space: pre; */
+}
+
+ul p {
+  display: inline;
 }
 
 p>code,
@@ -304,20 +322,8 @@ td>code {
   border-radius: .2rem;
 }
 
-/* pre>code {
-  display: block;
-  background: none;
-  white-space: pre;
-  -webkit-overflow-scrolling: touch;
-  overflow-x: scroll;
-  max-width: 100%;
-  min-width: 100px;
-  padding: 0;
-} */
-
 pre>code {
-  display: block;
-  background: #f1f1f1;
+  display: contents;
   padding: 1.33em;
   border-radius: 0.33em;
 }

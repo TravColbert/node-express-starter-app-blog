@@ -2,14 +2,14 @@ head(prefix="og: http://ogp.me/ns# nodejsexpressdemo: http://ogp.me/ns/apps/node
   meta(charset="utf-8")
   meta(name="viewport", content="width=device-width,initial-scale=1")
 
-  - var packageName = pkg?.name || 'Node.js Express Mongoose Starter'
-  - var packageDescription = pkg?.description || 'Node.js Express Mongoose Starter'
-  title= packageName + ' - ' + title
+  - var packageName = appTitle || pkg?.name || 'Node.js Express Mongoose Starter'
+  - var packageDescription = appDescription || pkg?.description || 'Node.js Express Mongoose Starter'
+  title= packageName + ' :: ' + title
   meta(name="keywords", content="{{ pkg.keywords.join(',') }}")
   meta(name="description", content="{{ pkg.description }}")
 
   meta(property="fb:app_id", content="293989217296609")
-  meta(property="og:title", content= packageName + ' - ' + title)
+  meta(property="og:title", content= title)
   meta(property="og:description", content= packageDescription)
   meta(property="og:url", content="http://nodejs-express-demo.fly.dev")
   meta(property="og:site_name", content="Node.js Express Mongoose Demo")

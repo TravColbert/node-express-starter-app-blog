@@ -9,26 +9,32 @@ module.exports = function (app) {
   return {
     index: function (req, res, next) {
       if (req.query.tag) {
-        res.locals.articles = app.locals.models[currentControllerName].all(
+        res.locals.render.articles = app.locals.models[currentControllerName].all(
           function (article) {
             return article.tags && article.tags.includes(req.query.tag)
           }
         )
-        res.locals.title = `Articles tagged as: ${req.query.tag}' (${res.locals.articles.length})`
+        res.locals.render.title = `Articles tagged as: ${req.query.tag}' (${res.locals.render.articles.length})`
       } else {
-        res.locals.articles = app.locals.models[currentControllerName].all()
-        res.locals.title = `All Articles (${res.locals.articles.length})`
+        res.locals.render.articles = app.locals.models[currentControllerName].all()
+        res.locals.render.title = `All Articles (${res.locals.render.articles.length})`
       }
       return next()
     },
     show: function (req, res, next) {
       if (req.params.id) {
-        res.locals.article = app.locals.models[currentControllerName].find(req.params.id)
+        res.locals.render.article = app.locals.models[currentControllerName].find(req.params.id)
       } else {
         console.debug(`No article ID provided - getting latest article`)
-        res.locals.article = app.locals.models[currentControllerName].last()
+        res.locals.render.article = app.locals.models[currentControllerName].last()
       }
-      res.locals.articles = app.locals.models[currentControllerName].all()
+      res.locals.render.title = res.locals.render.article.metadata.title
+      res.locals.render.articles = app.locals.models[currentControllerName].all()
+      console.dir([
+        res.locals.render.article,
+        res.locals.render.title,
+        res.locals.render.articles
+      ])
       return next()
     }
   }

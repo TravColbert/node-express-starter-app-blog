@@ -30,11 +30,6 @@ module.exports = function (app) {
       }
       res.locals.render.title = res.locals.render.article.metadata.title
       res.locals.render.articles = app.locals.models[currentControllerName].all()
-      console.dir([
-        res.locals.render.article,
-        res.locals.render.title,
-        res.locals.render.articles
-      ])
       return next()
     }
   }

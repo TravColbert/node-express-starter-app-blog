@@ -1,19 +1,22 @@
-head(prefix="og: http://ogp.me/ns# nodejsexpressdemo: http://ogp.me/ns/apps/nodejsexpressdemo#")
+head(lang="en", itemscope="itemscope", itemtype="http://schema.org/WebSite")
   meta(charset="utf-8")
   meta(name="viewport", content="width=device-width,initial-scale=1")
 
-  - var packageName = appTitle || pkg?.name || 'Node.js Express Mongoose Starter'
-  - var packageDescription = appDescription || pkg?.description || 'Node.js Express Mongoose Starter'
-  title= packageName + ' :: ' + title
-  meta(name="keywords", content="{{ pkg.keywords.join(',') }}")
-  meta(name="description", content="{{ pkg.description }}")
+  - var appName = appName || pkg?.name || 'Node.js Express Mongoose Starter'
+  - var appDescription = appDescription || pkg?.description || 'Node.js Express Mongoose Starter'
+  - var keywords = appKeywords || pkg?.keywords || "nodejs, express, starter"
+  - var title = appName + ' :: ' + title
 
-  meta(property="fb:app_id", content="293989217296609")
-  meta(property="og:title", content= title)
-  meta(property="og:description", content= packageDescription)
-  meta(property="og:url", content="http://nodejs-express-demo.fly.dev")
-  meta(property="og:site_name", content="Node.js Express Mongoose Demo")
-  meta(property="fb:admins", content="1037213945")
+  title= title
+  meta(name="keywords", content= keywords)
+  meta(name="description", content= appDescription)
+
+  //- Cleaner, less-dependent preview meta-tag setup
+  //- see: https://getoutofmyhead.dev/link-preview-meta-tags/
+  meta(itemprop="name", content= title)
+  meta(itemprop="description", content= appDescription)
+  meta(itemprop="image", content="/logo.png")
+  link(rel="alternate", type="application/json+oembed", href="https://getoutofmyhead.dev/oembed_link.json", title= title)
 
   script(src="https://unpkg.com/htmx.org@2.0.4", integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+", crossorigin="anonymous")
   link(rel="stylesheet", href="/css/reset.css")

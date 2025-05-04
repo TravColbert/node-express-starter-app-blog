@@ -102,6 +102,26 @@ body>footer {
   flex-direction: row;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --body-padding: 1rem;
+  }
+
+  .layout {
+    grid:
+      "header" auto "main" 1fr "footer" auto / 100vw;
+  }
+
+  body>main {
+    grid:
+      "section-header" auto "article" 1fr / 100%;
+  }
+
+  aside {
+    display: none;
+  }
+}
+
 /**
  * For 404's and error pages
  */
@@ -123,13 +143,6 @@ body>footer {
 /**
  * Section grid layout
  */
-.section-layout {
-  /* display: grid;
-  grid:
-    "section-header section-header" auto "article aside" 1fr / 1fr 300px;
-  gap: var(--body-padding); */
-}
-
 .section-layout>header {
   grid-area: section-header;
 }
@@ -285,6 +298,13 @@ article .content ul {
 
 article .content ol {
   list-style-type: decimal;
+}
+
+article .content li {
+  text-indent: calc(-1 * var(--body-padding));
+  /* Moves first line left */
+  padding-left: var(--body-padding);
+  /* Ensures all lines align */
 }
 
 article .content em {

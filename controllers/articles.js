@@ -9,7 +9,7 @@ module.exports = function (app) {
   return {
     index: function (req, res, next) {
       if (req.query.tag) {
-        res.locals.render.articles = app.locals.cache(`articles-tagged-${req.query.tag}`, () => {
+        res.locals.render.articles = app.locals.cache(`articles-tagged-${req.query.tag}`, function () {
           return app.locals.models[currentControllerName].all(
             function (article) {
               return article.tags && article.tags.includes(req.query.tag)
@@ -27,7 +27,7 @@ module.exports = function (app) {
     },
     show: function (req, res, next) {
       if (req.params.id) {
-        res.locals.render.article = app.locals.cache(`article-${req.params.id}`, (req) => {
+        res.locals.render.article = app.locals.cache(`article-${req.params.id}`, function () {
           return app.locals.models[currentControllerName].find(req.params.id)
         })
       } else {
@@ -37,7 +37,7 @@ module.exports = function (app) {
         })
       }
       res.locals.render.title = res.locals.render.article.metadata.title
-      res.locals.render.articles = app.locals.cache(`articles-all`, () => {
+      res.locals.render.articles = app.locals.cache(`articles-all`, function () {
         return app.locals.models[currentControllerName].all()
       })
       return next()

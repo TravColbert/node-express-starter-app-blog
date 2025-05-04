@@ -3,18 +3,18 @@ head(lang="en", itemscope="itemscope", itemtype="http://schema.org/WebSite")
   meta(name="viewport", content="width=device-width,initial-scale=1")
 
   - var appName = appName || pkg?.name || 'Node.js Express Mongoose Starter'
-  - var appDescription = appDescription || pkg?.description || 'Node.js Express Mongoose Starter'
-  - var keywords = appKeywords || pkg?.keywords || "nodejs, express, starter"
+  - var description = [description, (appDescription || pkg?.description || 'Node.js Express Mongoose Starter')].filter(element => { return (element != null || element != undefined || element.trim() != "")}).join(' - ')
+  - var keywords = [keywords, (appKeywords || pkg?.keywords || "nodejs, express, starter")].join(', ')
   - var title = appName + ' :: ' + title
 
   title= title
   meta(name="keywords", content= keywords)
-  meta(name="description", content= appDescription)
+  meta(name="description", content= description)
 
   //- Cleaner, less-dependent preview meta-tag setup
   //- see: https://getoutofmyhead.dev/link-preview-meta-tags/
   meta(itemprop="name", content= title)
-  meta(itemprop="description", content= appDescription)
+  meta(itemprop="description", content= description)
   meta(itemprop="image", content="/logo.png")
   link(rel="alternate", type="application/json+oembed", href="https://getoutofmyhead.dev/oembed_link.json", title= title)
 

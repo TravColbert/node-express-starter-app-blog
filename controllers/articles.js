@@ -23,6 +23,8 @@ module.exports = function (app) {
         })
         res.locals.render.title = `All Articles (${res.locals.render.articles.length})`
       }
+      res.locals.render.keywords = "articles, blog"
+      res.locals.render.description = "Articles"
       return next()
     },
     show: function (req, res, next) {
@@ -37,6 +39,12 @@ module.exports = function (app) {
         })
       }
       res.locals.render.title = res.locals.render.article.metadata.title
+      if (res.locals.render.article.metadata.keywords) {
+        res.locals.render.keywords = res.locals.render.article.metadata.keywords
+      } else {
+        res.locals.render.keywords = res.locals.render.article.metadata.tags.join(', ')
+      }
+      res.locals.render.description = res.locals.render.article.metadata.blurb
       res.locals.render.articles = app.locals.cache(`articles-all`, function () {
         return app.locals.models[currentControllerName].all()
       })

@@ -3,7 +3,7 @@ head(lang="en", itemscope="itemscope", itemtype="http://schema.org/WebSite")
   meta(name="viewport", content="width=device-width,initial-scale=1")
 
   - var appName = appName || pkg?.name || 'Node.js Express Mongoose Starter'
-  - var description = [description, (appDescription || pkg?.description || 'Node.js Express Mongoose Starter')].filter(element => { return (element != null || element != undefined || element.trim() != "")}).join(' - ')
+  - var description = [(appDescription || pkg?.description || 'Node.js Express Mongoose Starter'), description].filter(element => { return (element != null || element != undefined || element.trim() != "")}).join(' - ')
   - var keywords = [keywords, (appKeywords || pkg?.keywords || "nodejs, express, starter")].join(', ')
   - var title = appName + ' :: ' + title
 

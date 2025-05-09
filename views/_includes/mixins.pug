@@ -1,0 +1,50 @@
+mixin articleTags(tags)
+  if tags
+    ul.article-tags
+      for tag in tags
+        li.article-tag
+          a(href=`/articles?tag=${tag}`) ##{tag}
+
+mixin articleList(articles)
+  .articles 
+    nav
+      ul.articles-list
+        each article in articles
+          li.article-item
+            h3.article
+              a(href=`/articles/${article.id}`, hx-get=`/articles/${article.id}`, hx-target="#main-article-content").article-title= article.title
+            .meta                
+              if article.publishedAt 
+                span.published-at= new Date(article.publishedAt).toLocaleDateString()
+              if article.tags
+                +articleTags(article.tags)
+              if article.blurb
+                p.blurb= article.blurb
+
+mixin articleMeta(article, targetElement=false)
+  header(hx-swap-oob=targetElement)#main-article-meta-header
+    h2.article-title
+      a(href="#")= article.metadata.title
+    .meta
+      if article.metadata.publishedAt
+        .published-at
+          span= article.metadata.publishedAt
+      if article.metadata.tags
+        nav 
+          +articleTags(article.metadata.tags)
+
+mixin articleContent(article)
+  #main-article-content.content !{article.content}
+  nav
+    a(href="/articles") Back to articles
+
+mixin tagList(tags)
+  if tags 
+    .tags.feature
+      h3 Tags
+      ul.article-tags
+        li.article-tag
+          a(href="/articles") #all
+        for tag in tags 
+          li.article-tag
+            a(href=`/articles?tag=${tag}`) ##{tag}

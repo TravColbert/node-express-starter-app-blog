@@ -237,7 +237,7 @@ aside.sidebar #tag-list {
   order: -1;
 }
 
-aside.sidebar .article-list {
+aside.sidebar .articles {
   display: flex;
   flex-direction: column;
   flex: 1;

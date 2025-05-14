@@ -7,6 +7,6 @@
 nav
   ul
     li
-      a(href="/articles") Articles
+      a(href="/articles", hx-get='/articles', hx-target="#article-content" hx-swap="innerHTML swap:0.25s", hx-push-url="true") Articles
     li
-      a(href="/about") About
+      a(href="/about", hx-get='/about', hx-target="#article-content" hx-swap="innerHTML swap:0.25s", hx-push-url="true") About

@@ -1,11 +1,18 @@
 extends ../layout-default.pug
 
+block head 
+  +head
+
 block aside 
   +tagList(tags)
   +articleList(articles)
 
-block articleMeta
-  +articleMeta(article)
+block mainContent
+  +articleMeta(article, "outerHTML:#main-article-meta-header")
+  +articleContent(article)(id="article-body")
+
+//- block articleMeta
+//-   +articleMeta(article, "outerHTML:#main-article-meta-header")
   
-block content
-  +articleContent(article)
+//- block content
+//-   +articleContent(article)(id="main-content")

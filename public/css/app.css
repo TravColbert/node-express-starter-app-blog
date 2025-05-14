@@ -240,10 +240,6 @@ aside.sidebar .articles {
 }
 
 /* ARTICLE FORMATTING */
-#article-content.htmx-swapping {
-  opacity: 0;
-  transition: opacity 0.25s ease-out;
-}
 
 /* #main-article-meta-header.htmx-swapping {
   opacity: 0;
@@ -382,4 +378,10 @@ pre>code {
 
 a {
   text-decoration: none;
+}
+
+/* HTMx Transition Styles */
+.htmx-swapping {
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
 }

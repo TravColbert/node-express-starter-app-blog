@@ -1,3 +1,5 @@
+include mixins 
+
 head(lang="en", itemscope="itemscope", itemtype="http://schema.org/WebSite")
   meta(charset="utf-8")
   meta(name="viewport", content="width=device-width,initial-scale=1")
@@ -8,18 +10,7 @@ head(lang="en", itemscope="itemscope", itemtype="http://schema.org/WebSite")
   link(rel="stylesheet", href="/css/app.css")
 
   block head
-    //- Define extra scripts and links in the 'head' block
-    - var appName = appName || pkg?.name || 'Node.js Express Mongoose Starter'
-    - var description = [(appDescription || pkg?.description || 'Node.js Express Mongoose Starter'), description].filter(element => { return (element || element?.trim() != "")}).join(' - ')
-    - var keywords = [keywords, (appKeywords || pkg?.keywords || "nodejs, express, starter")].join(', ')
-    - var title = appName + ' :: ' + title
+    +head
 
-    title#page-title= title
-    meta(name="keywords", content= keywords)#page-keywords
-    meta(name="description", content= description)#page-description
-    //- Cleaner, less-dependent preview meta-tag setup
-    //- see: https://getoutofmyhead.dev/link-preview-meta-tags/
-    meta(itemprop="name", content= title)#page-itemprop-name
-    meta(itemprop="description", content= description)#page-itemprop-description
-    meta(itemprop="image", content="/logo.png")#page-itemprop-image
-    link(rel="alternate", type="application/json+oembed", href="https://getoutofmyhead.dev/oembed_link.json", title= title)#page-itemprop-title
+  meta(itemprop="image", content="/logo.png")#page-itemprop-image
+  

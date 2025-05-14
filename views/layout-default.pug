@@ -1,4 +1,4 @@
-include _includes/mixins.pug
+include _includes/mixins
 
 if fullPage
   doctype html
@@ -7,7 +7,6 @@ if fullPage
     body.layout
       header
         include _includes/header.pug
-        //- include _includes/breadcrumbs.pug
       main.section-layout
         header 
           block sectionHeader
@@ -20,13 +19,16 @@ if fullPage
               include _includes/flashes.pug
         aside 
           block aside
-        article
-          header#main-article-meta-header
-            block articleMeta
-          block content
+        article#article-content
+          block mainContent
+          //- block articleMeta
+          //- block content
       footer.footer
         include _includes/footer.pug
     include _includes/foot.pug
 else
-  block articleMeta
-  block content
+  block head
+  block mainContent
+  block aside
+  //- block articleMeta
+  //- block content

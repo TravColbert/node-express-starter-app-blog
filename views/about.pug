@@ -1,9 +1,7 @@
 extends ./layout-default.pug
 
-block articleMeta 
+block mainContent
   h2.article-title About Me
-
-block content
   .content
     p Hi, I'm 
       span.hero Travis.
@@ -23,54 +21,7 @@ block content
       li Provides network monitoring for remote translation sites in the deepest 
         | parts of central Africa.
     p 
-      | I live on the Yucatan Peninsula in Mexico.
-    p
-      | When I am not working, I'm spending time with my wife and duaghter.
-      | Hopefully we're successfully teaching our daughter to live a 
-      | deliberate, creative life based on values not fads.
+      | I live on the Yucatan Peninsula in Mexico with my wife and daughter.
 
 block aside
-  .feature 
-    h3 Languages
-    ul
-      li Node.js/JavaScript
-      li Ruby
-      li PHP
-      li C#
-  .feature
-    h3 Databases
-    ul
-      li SQLs: PostgreSQL, MySQL
-      li NoSQLs: MongoDB, Redis
-  .feature        
-    h3 Front-side 
-    ul
-      li HTMx
-      li Vanilla JavaScript
-      li React
-      li CSS
-  .feature    
-    h3 Back-side
-    ul
-      li Node.js
-      li Express
-      li Ruby on Rails
-      li PHP
-  .feature 
-    h3 Mobile
-    ul
-      li React Native
-      li Electron
-  .feature
-    h3 Cloud 
-    ul
-      li AWS: S3, SQS, SNS, Lambda, DynamoDB
-      li Heroku
-      li Render 
-      li Google Cloud 
-  .feature
-    h3 DevOps
-    ul
-      li GitHub Actions
-      li CI/CD      
-      li Docker 
+  +skillList("innerHTML:aside")

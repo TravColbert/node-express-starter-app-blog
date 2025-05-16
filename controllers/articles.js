@@ -38,16 +38,18 @@ module.exports = function (app) {
           return app.locals.models[currentControllerName].last()
         })
       }
-      res.locals.render.title = res.locals.render.article.metadata.title
-      if (res.locals.render.article.metadata.keywords) {
-        res.locals.render.keywords = res.locals.render.article.metadata.keywords
-      } else {
-        res.locals.render.keywords = res.locals.render.article.metadata.tags.join(', ')
+      if (res.locals.render.article) {
+        res.locals.render.title = res.locals.render.article.metadata.title
+        if (res.locals.render.article.metadata.keywords) {
+          res.locals.render.keywords = res.locals.render.article.metadata.keywords
+        } else {
+          res.locals.render.keywords = res.locals.render.article.metadata.tags.join(', ')
+        }
+        res.locals.render.description = res.locals.render.article.metadata.blurb
+        res.locals.render.articles = app.locals.cache(`articles-all`, function () {
+          return app.locals.models[currentControllerName].all()
+        })
       }
-      res.locals.render.description = res.locals.render.article.metadata.blurb
-      res.locals.render.articles = app.locals.cache(`articles-all`, function () {
-        return app.locals.models[currentControllerName].all()
-      })
       return next()
     }
   }

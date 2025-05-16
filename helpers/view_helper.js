@@ -16,24 +16,22 @@ const isMarkdown = function (article) {
 module.exports = function (app) {
   return {
     compileMainNavigation: function (req, res, next) {
-      if (!res.locals?.render?.articles || !res.locals?.render?.articles?.length) {
-        return next()
+      if (res.locals?.render?.articles && res.locals?.render?.articles?.length) {
+        res.locals.render.mainNavigation = res.locals.render.articles.map(article => {
+          return {
+            id: article.id,
+            title: article.title,
+            url: `/articles/${article.id}`,
+            selected: (res.locals.render.article?.metadata?.id === article.id)
+          }
+        })
       }
-      res.locals.render.mainNavigation = res.locals.render.articles.map(article => {
-        return {
-          id: article.id,
-          title: article.title,
-          url: `/articles/${article.id}`,
-          selected: (res.locals.render.article?.metadata?.id === article.id)
-        }
-      })
       return next()
     },
     compileSubNavigation: function (req, res, next) {
-      if (!res.locals.render?.article) {
-        return next()
+      if (res.locals.render?.article) {
+        res.locals.render.subNavigation = []
       }
-      res.locals.render.subNavigation = []
       return next()
     },
     compileTagList: function (req, res, next) {
@@ -60,15 +58,16 @@ module.exports = function (app) {
       }
     },
     filter: function (req, res, next) {
-      const tag = req.query.tag
+      if (res.locals.render?.articles && res.locals.render.articles?.length) {
+        const tag = req.query.tag
 
-      if (tag) {
-        res.locals.render.articles = res.locals.render.articles.filter(article => {
-          const articleTags = article.tags.map(articleTag => articleTag.toLowerCase())
-          return articleTags.includes(tag.toLowerCase())
-        })
+        if (tag) {
+          res.locals.render.articles = res.locals.render.articles.filter(article => {
+            const articleTags = article.tags.map(articleTag => articleTag.toLowerCase())
+            return articleTags.includes(tag.toLowerCase())
+          })
+        }
       }
-
       return next()
     },
     paginate: function (req, res, next) {
@@ -147,25 +146,27 @@ module.exports = function (app) {
       return next()
     },
     sort: function (req, res, next) {
-      const sortBy = req.query.sort_by || 'publishedAt'
-      const sortOrder = req.query.sort_order || 'desc'
+      if (res.locals.render?.articles && res.locals.render.articles?.length) {
+        const sortBy = req.query.sort_by || 'publishedAt'
+        const sortOrder = req.query.sort_order || 'desc'
 
-      if (sortBy === 'publishedAt') {
-        res.locals.render.articles.sort((a, b) => {
-          const aPublishedAt = new Date(a.publishedAt)
-          const bPublishedAt = new Date(b.publishedAt)
-          return (sortOrder === 'desc')
-            ? (aPublishedAt < bPublishedAt)
-              ? 1
-              : (aPublishedAt > bPublishedAt)
-                ? -1
-                : 0
-            : -1
-        })
-      } else if (sortBy === 'title') {
-        res.locals.render.articles.sort((a, b) => {
-          return sortOrder === 'desc' ? b.title.localeCompare(a.title) : a.title.localeCompare(b.title)
-        })
+        if (sortBy === 'publishedAt') {
+          res.locals.render.articles.sort((a, b) => {
+            const aPublishedAt = new Date(a.publishedAt)
+            const bPublishedAt = new Date(b.publishedAt)
+            return (sortOrder === 'desc')
+              ? (aPublishedAt < bPublishedAt)
+                ? 1
+                : (aPublishedAt > bPublishedAt)
+                  ? -1
+                  : 0
+              : -1
+          })
+        } else if (sortBy === 'title') {
+          res.locals.render.articles.sort((a, b) => {
+            return sortOrder === 'desc' ? b.title.localeCompare(a.title) : a.title.localeCompare(b.title)
+          })
+        }
       }
 
       return next()

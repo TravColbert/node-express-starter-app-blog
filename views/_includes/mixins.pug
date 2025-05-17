@@ -11,6 +11,23 @@ mixin head
   meta(itemprop="description", content= description, hx-swap-oob="outerHTML:#page-itemprop-description")#page-itemprop-description
   link(rel="alternate", type="application/json+oembed", href="https://getoutofmyhead.dev/oembed_link.json", title= title, hx-swap-oob="outerHTML:#page-itemprop-title")#page-itemprop-title
 
+mixin header(targetElement=false)
+  .masthead
+    h1
+      a(href="/") Travis Colbert
+  nav
+    ul
+      if targetElement
+        li
+          a(href="/articles", hx-get='/articles', hx-target=targetElement, hx-swap="innerHTML swap:0.25s", hx-push-url="true") Articles
+        li
+          a(href="/about", hx-get='/about', hx-target=targetElement, hx-swap="innerHTML swap:0.25s", hx-push-url="true") About
+      else  
+        li
+          a(href="/articles") Articles
+        li
+          a(href="/about") About
+
 mixin articleTags(tags)
   if tags
     ul(id!=attributes.id || "article-tag-list").article-tags

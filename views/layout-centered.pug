@@ -1,12 +1,11 @@
-block head 
-  script(src="https://kit.fontawesome.com/d5c73f28c4.js", crossorigin="anonymous")
+include _includes/mixins
 
 doctype html
 html(lang="en")
   include _includes/head.pug
   body.layout
     header
-      include _includes/header.pug
+      +header
     main.centered-layout
       block content
     footer.footer

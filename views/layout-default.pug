@@ -6,7 +6,7 @@ if fullPage
     include _includes/head.pug
     body.layout
       header
-        include _includes/header.pug
+        +header("#article-content")
       main.section-layout
         header 
           block sectionHeader
@@ -21,8 +21,6 @@ if fullPage
           block aside
         article#article-content
           block mainContent
-          //- block articleMeta
-          //- block content
       footer.footer
         include _includes/footer.pug
     include _includes/foot.pug

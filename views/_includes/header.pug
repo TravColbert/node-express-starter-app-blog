@@ -1,12 +1,9 @@
 .masthead
   h1
     a(href="/") Travis Colbert
-  //- .blurb
-  //-   p I am a software engineer with a passion for building web applications. 
-  //-   p I provide innovative solutions to highly vertical problems.
 nav
   ul
     li
-      a(href="/articles", hx-get='/articles', hx-target="#article-content" hx-swap="innerHTML swap:0.25s", hx-push-url="true") Articles
+      a(href="/articles", hx-get='/articles', hx-swap="innerHTML:#article-content swap:0.25s", hx-push-url="true") Articles
     li
-      a(href="/about", hx-get='/about', hx-target="#article-content" hx-swap="innerHTML swap:0.25s", hx-push-url="true") About
+      a(href="/about", hx-get='/about', hx-swap="innerHTML:#article-content swap:0.25s", hx-push-url="true") About

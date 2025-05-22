@@ -118,9 +118,9 @@ module.exports = {
       return res.status(404).render('errors/404')
     }
 
-    res.locals.render.title = 'Latest Articles'
+    res.locals.render.title = 'Latest Article'
 
-    return res.render('articles/latest', res.locals.render)
+    return res.render('articles/show', res.locals.render)
   },
   sort: function (req, res, next) {
     const sortBy = req.query.sort_by || 'publishedAt'

@@ -2,7 +2,7 @@ include _includes/mixins
 
 if fullPage
   doctype html
-  html(lang="en")
+  html(lang=lang || 'en')
     include _includes/head.pug
     body.layout
       header

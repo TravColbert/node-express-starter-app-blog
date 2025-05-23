@@ -122,7 +122,7 @@ module.exports = function (app) {
       res.locals.render.description = res.locals.render.article.metadata.blurb || app.locals.appDescription
       res.locals.render.keywords = res.locals.render.article.metadata.tags.join(', ') || app.locals.appKeywords
 
-      return res.render('articles/latest', res.locals.render)
+      return res.render('articles/show', res.locals.render)
     },
     setDescription: function (req, res, next) {
       app.locals.debug && console.debug('Setting description')

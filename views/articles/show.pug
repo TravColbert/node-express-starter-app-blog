@@ -1,11 +1,13 @@
 extends ../layout
 
-block aside 
-  +tagList(tags)
-  +articleList(articles)
+block head 
+  +head
 
-block articleMeta
-  +articleMeta(article)
-  
-block content
-  +articleContent(article)
+block aside 
+  div(hx-swap-oob="innerHTML:aside")
+    +tagList(tags)
+    +articleList(articles)
+
+block mainContent
+  +articleMeta(article, "outerHTML:#main-article-meta-header")
+  +articleContent(article)(id="article-body")

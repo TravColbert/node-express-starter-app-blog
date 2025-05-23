@@ -1,0 +1,80 @@
+# robots.txt for Blocking AI Web Crawlers
+
+# Block common AI crawlers
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: Claude-API
+Disallow: /
+
+User-agent: Cohere-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+# Block potential future AI crawlers using wildcard patterns
+User-agent: *bot
+Disallow: /
+
+User-agent: *crawler
+Disallow: /
+
+User-agent: *spider
+Disallow: /
+
+User-agent: *scraper
+Disallow: /
+
+User-agent: *ai
+Disallow: /
+
+# Allow regular search engines (recommended)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Allow all other bots
+User-agent: *
+Allow: /

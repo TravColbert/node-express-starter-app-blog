@@ -1,0 +1,137 @@
+
+mixin head
+  //- - console.debug('head mixin', appName, appDescription, appKeywords)
+  //- - console.debug('head mixin', title, description, keywords)
+  title(hx-swap-oob="outerHTML:#page-title")#page-title= title
+  meta(name="keywords", content= keywords, hx-swap-oob="outerHTML:#page-keywords")#page-keywords
+  meta(name="description", content= description, hx-swap-oob="outerHTML:#page-description")#page-description
+  //- Cleaner, less-dependent preview meta-tag setup
+  //- see: https://getoutofmyhead.dev/link-preview-meta-tags/
+  meta(itemprop="name", content= title, hx-swap-oob="outerHTML:#page-itemprop-name")#page-itemprop-name
+  meta(itemprop="description", content= description, hx-swap-oob="outerHTML:#page-itemprop-description")#page-itemprop-description
+  link(rel="alternate", type="application/json+oembed", href="https://getoutofmyhead.dev/oembed_link.json", title= title, hx-swap-oob="outerHTML:#page-itemprop-title")#page-itemprop-title
+
+mixin header(targetElement=false)
+  .masthead
+    h1
+      a(href="/") Travis Colbert
+  nav
+    ul
+      if targetElement
+        li
+          a(href="/articles", hx-get='/articles', hx-target=targetElement, hx-swap="innerHTML swap:0.25s", hx-push-url="true") Articles
+        li
+          a(href="/about", hx-get='/about', hx-target=targetElement, hx-swap="innerHTML swap:0.25s", hx-push-url="true") About
+      else  
+        li
+          a(href="/articles") Articles
+        li
+          a(href="/about") About
+
+mixin articleTags(tags)
+  if tags
+    ul(id!=attributes.id || "article-tag-list").article-tags
+      for tag in tags
+        li.article-tag
+          a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`, hx-target="#article-content" hx-swap="innerHTML swap:0.25s") ##{tag}
+
+mixin articleList(articles)
+  div(id!=attributes.id || "article-list").articles
+    nav
+      ul.articles-list
+        each article in articles
+          li.article-item
+            h3.article
+              a(href=`/articles/${article.id}`, hx-get=`/articles/${article.id}`, hx-target="#article-content" hx-swap="innerHTML swap:0.25s", hx-push-url="true").article-title= article.title
+            .meta
+              if article.publishedAt 
+                span.published-at= new Date(article.publishedAt).toLocaleDateString()
+              if article.tags
+                +articleTags(article.tags)
+              if article.blurb
+                p.blurb= article.blurb
+
+mixin articleMeta(article, targetElement=false)
+  if article
+    header(id!=attributes.id || "main-article-meta-header")
+      h2.article-title
+        a(href="#")= article.metadata.title
+      .meta
+        if article.metadata.publishedAt
+          .published-at
+            span= article.metadata.publishedAt
+        if article.metadata.tags
+          nav 
+            +articleTags(article.metadata.tags)
+
+mixin articleContent(article)
+  div(id!=attributes.id || "article-body").content !{article.content}
+
+mixin tagList(tags, targetElement=false)
+  if tags 
+    if targetElement
+      div(hx-swap-oob=targetElement)
+        div.tags.feature#tag-list
+          h3 Tags
+          ul.article-tags
+            li.article-tag
+              a(href="/articles", hx-get="/articles", hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") #all
+            for tag in tags 
+              li.article-tag
+                a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`, hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") ##{tag}
+    else
+      div.tags.feature#tag-list
+        h3 Tags
+        ul.article-tags
+          li.article-tag
+            a(href="/articles", hx-get="/articles", hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") #all
+          for tag in tags 
+            li.article-tag
+              a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`, hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") ##{tag}
+
+mixin skillList(targetElement=false)
+  .skills(hx-swap-oob=targetElement)
+    .feature 
+      h3 Languages
+      ul
+        li Node.js/JavaScript
+        li Ruby
+        li PHP
+        li C#
+    .feature
+      h3 Databases
+      ul
+        li SQLs: PostgreSQL, MySQL
+        li NoSQLs: MongoDB, Redis
+    .feature        
+      h3 Front-side 
+      ul
+        li HTMx
+        li Vanilla JavaScript
+        li React
+        li CSS
+    .feature    
+      h3 Back-side
+      ul
+        li Node.js
+        li Express
+        li Ruby on Rails
+        li PHP
+    .feature 
+      h3 Mobile
+      ul
+        li React Native
+        li Electron
+    .feature
+      h3 Cloud 
+      ul
+        li AWS: S3, SQS, SNS, Lambda, DynamoDB
+        li Heroku
+        li Render 
+        li Google Cloud 
+    .feature
+      h3 DevOps
+      ul
+        li GitHub Actions
+        li CI/CD      
+        li Docker 

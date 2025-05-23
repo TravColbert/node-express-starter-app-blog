@@ -1,18 +1,22 @@
 extends ../layout
 
-block articleMeta
-  if title 
-    h2.shadowed= title
+//- block articleMeta
+//-   if title 
+//-     h2.shadowed= title
 
-  if errors
-    .alert.alert-danger
-      each error in errors
-        p= error.message
-  if coverImage 
-    img.cover-image(src=`/images/${coverImage}`)
+//-   if errors
+//-     .alert.alert-danger
+//-       each error in errors
+//-         p= error.message
+//-   if coverImage 
+//-     img.cover-image(src=`/images/${coverImage}`)
   
 block aside 
-  +tagList(tags)
+  +tagList(tags, "innerHTML:aside")
 
-block content
+block mainContent
+  +articleMeta(article)
   +articleList(articles)
+
+//- block content
+//-   +articleList(articles)(id="main-content")

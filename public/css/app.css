@@ -355,7 +355,7 @@ article img {
 }
 
 h3.article {
-  line-height: normal;
+  line-height: var(--body-line-height-tertiary);
 }
 
 figure figcaption {

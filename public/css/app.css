@@ -218,9 +218,14 @@ aside .feature {
   margin-bottom: var(--body-padding);
 }
 
-aside .feature h3 {
+aside .feature h2 {
   font-weight: 600;
   border-bottom: 1px solid var(--color-foreground);
+}
+
+aside .feature h3 {
+  font-weight: 500;
+  border-bottom: 1px dotted var(--color-foreground);
 }
 
 aside.sidebar {
@@ -347,6 +352,10 @@ article img {
   margin: 0 !important;
   border: 1px solid var(--color-accent-secondary);
   border-radius: 0.33em;
+}
+
+h3.article {
+  line-height: normal;
 }
 
 figure figcaption {

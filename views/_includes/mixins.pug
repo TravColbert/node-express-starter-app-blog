@@ -72,7 +72,7 @@ mixin tagList(tags, targetElement=false)
     if targetElement
       div(hx-swap-oob=targetElement)
         div.tags.feature#tag-list
-          h3 Tags
+          h2 Tags
           ul.article-tags
             li.article-tag
               a(href="/articles", hx-get="/articles", hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") #all
@@ -81,7 +81,7 @@ mixin tagList(tags, targetElement=false)
                 a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`, hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") ##{tag}
     else
       div.tags.feature#tag-list
-        h3 Tags
+        h2 Tags
         ul.article-tags
           li.article-tag
             a(href="/articles", hx-get="/articles", hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") #all

@@ -5,6 +5,10 @@ const path = require('path')
 
 const articlePath = path.join(__dirname, '../', 'articles')
 
+const getArticleId = function (fileName) {
+  return path.basename(fileName, '.js')
+}
+
 const getArticleMetadata = function (fileName) {
   try {
     const article = require(path.join(articlePath, fileName))
@@ -68,6 +72,8 @@ module.exports = {
     const articleFileName = path.join(articlePath, articleName + '.js')
     try {
       const article = require(articleFileName)
+      article.metadata['fileName'] = path.basename(articleFileName, '.js')
+      article.metadata['id'] = path.basename(articleFileName, '.js')
       return article
     } catch (error) {
       console.error(`Could not read article: ${articleFileName}`)

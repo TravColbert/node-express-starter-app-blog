@@ -17,11 +17,13 @@ module.exports = function (app) {
           )
         })
         res.locals.render.title = `Articles tagged as: ${req.query.tag}' (${res.locals.render.articles.length})`
+        res.locals.render.canonical = `/articles?tag=${req.query.tag}`
       } else {
         res.locals.render.articles = app.locals.cache(`articles-all`, function () {
           return app.locals.models[currentControllerName].all()
         })
         res.locals.render.title = `All Articles (${res.locals.render.articles.length})`
+        res.locals.render.canonical = `/articles`
       }
       res.locals.render.keywords = "articles, blog"
       res.locals.render.description = "Articles"
@@ -45,6 +47,7 @@ module.exports = function (app) {
         } else {
           res.locals.render.keywords = res.locals.render.article.metadata.tags.join(', ')
         }
+        res.locals.render.canonical = `/articles/${res.locals.render.article.metadata.id || res.locals.render.article.metadata.fileName}`
         res.locals.render.description = res.locals.render.article.metadata.blurb
         res.locals.render.articles = app.locals.cache(`articles-all`, function () {
           return app.locals.models[currentControllerName].all()

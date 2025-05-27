@@ -14,6 +14,7 @@ module.exports = function (app) {
       res.locals.render.title = "About"
       res.locals.render.keywords = "about, blog"
       res.locals.render.description = "About this blog"
+      res.locals.render.canonical = `/about`
       next()
     }, [
       viewHelper.compileMainNavigation,

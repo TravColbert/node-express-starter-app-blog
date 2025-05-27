@@ -10,6 +10,8 @@ mixin head
   meta(itemprop="name", content= title, hx-swap-oob="outerHTML:#page-itemprop-name")#page-itemprop-name
   meta(itemprop="description", content= description, hx-swap-oob="outerHTML:#page-itemprop-description")#page-itemprop-description
   link(rel="alternate", type="application/json+oembed", href="https://getoutofmyhead.dev/oembed_link.json", title= title, hx-swap-oob="outerHTML:#page-itemprop-title")#page-itemprop-title
+  if canonical 
+    link(rel="canonical", href=canonical, hx-swap-oob="outerHTML:#page-canonical")#page-canonical
 
 mixin header(targetElement=false)
   .masthead

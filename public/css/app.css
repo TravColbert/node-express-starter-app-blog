@@ -393,6 +393,11 @@ a {
 
 /* HTMx Transition Styles */
 .htmx-swapping {
-  opacity: 0;
-  transition: opacity 0.25s ease-out;
+  opacity: 0.25;
+  transition: opacity 0.25s ease-in;
+}
+
+.htmx-settling {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
 }

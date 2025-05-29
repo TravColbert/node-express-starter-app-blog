@@ -17,13 +17,13 @@ mixin header(targetElement=false)
   .masthead
     h1
       a(href="/") Travis Colbert
-  nav
+  nav(hx-swap="innerHTML swap:0.25s settle:0.5s show:window:top", hx-push-url="true")
     ul
       if targetElement
         li
-          a(href="/articles", hx-get='/articles', hx-target=targetElement, hx-swap="innerHTML swap:0.25s", hx-push-url="true") Articles
+          a(href="/articles", hx-get='/articles', hx-target=targetElement) Articles
         li
-          a(href="/about", hx-get='/about', hx-target=targetElement, hx-swap="innerHTML swap:0.25s", hx-push-url="true") About
+          a(href="/about", hx-get='/about', hx-target=targetElement) About
       else  
         li
           a(href="/articles") Articles
@@ -32,19 +32,19 @@ mixin header(targetElement=false)
 
 mixin articleTags(tags)
   if tags
-    ul(id!=attributes.id || "article-tag-list").article-tags
+    ul(hx-target="#article-content" hx-swap="innerHTML swap:0.25s settle:0.5s show:window:top" id!=attributes.id || "article-tag-list").article-tags
       for tag in tags
         li.article-tag
-          a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`, hx-target="#article-content" hx-swap="innerHTML swap:0.25s") ##{tag}
+          a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`) ##{tag}
 
 mixin articleList(articles)
   div(id!=attributes.id || "article-list").articles
     nav
-      ul.articles-list
+      ul(hx-target="#article-content" hx-swap="innerHTML swap:0.25s settle:0.5s show:window:top", hx-push-url="true").articles-list
         each article in articles
           li.article-item
             h3.article
-              a(href=`/articles/${article.id}`, hx-get=`/articles/${article.id}`, hx-target="#article-content" hx-swap="innerHTML swap:0.25s", hx-push-url="true").article-title= article.title
+              a(href=`/articles/${article.id}`, hx-get=`/articles/${article.id}`).article-title= article.title
             .meta
               if article.publishedAt 
                 span.published-at= new Date(article.publishedAt).toLocaleDateString()
@@ -75,21 +75,21 @@ mixin tagList(tags, targetElement=false)
       div(hx-swap-oob=targetElement)
         div.tags.feature#tag-list
           h2 Tags
-          ul.article-tags
+          ul(hx-target="#article-content", hx-swap="innerHTML swap:0.25s settle:0.5s show:window:top", hx-push-url="true").article-tags
             li.article-tag
-              a(href="/articles", hx-get="/articles", hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") #all
+              a(href="/articles", hx-get="/articles") #all
             for tag in tags 
               li.article-tag
-                a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`, hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") ##{tag}
+                a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`) ##{tag}
     else
       div.tags.feature#tag-list
         h2 Tags
-        ul.article-tags
+        ul(hx-target="#article-content", hx-swap="innerHTML swap:0.25s settle:0.5s show:window:top", hx-push-url="true").article-tags
           li.article-tag
-            a(href="/articles", hx-get="/articles", hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") #all
+            a(href="/articles" hx-get="/articles") #all
           for tag in tags 
             li.article-tag
-              a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`, hx-target="#article-content", hx-swap="innerHTML swap:0.25s", hx-push-url="true") ##{tag}
+              a(href=`/articles?tag=${tag}`, hx-get=`/articles?tag=${tag}`) ##{tag}
 
 mixin skillList(targetElement=false)
   .skills(hx-swap-oob=targetElement)

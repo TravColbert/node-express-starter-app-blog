@@ -3,10 +3,10 @@ const router = express.Router({ mergeParams: true })
 const path = require('path')
 
 module.exports = function (app, appInstance) {
-  const viewHelper = require(path.join(__dirname, '..', app.locals.basePath, appInstance, app.locals.helperPath, 'view_helper'))(app)
+  const viewHelper = require(path.join(__dirname, "..", app.locals.helperPath, 'view_helper'))(app)
 
   // We specify a custom controller since we don't use the standard '[routename].js' controller
-  const controller = require(path.join(__dirname, '..', app.locals.basePath, appInstance, app.locals.controllerPath, 'articles'))(app)
+  const controller = require(path.join(__dirname, "..", app.locals.controllerPath, 'articles'))(app)
 
   router.route("/about")
     .get((req, res, next) => {

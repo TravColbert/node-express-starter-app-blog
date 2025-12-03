@@ -3,7 +3,9 @@ const router = express.Router({ mergeParams: true })
 const path = require('path')
 
 module.exports = function (app, appInstance) {
-    const viewHelper = require(path.join(__dirname, '..', app.locals.helperPath, 'view_helper'))(app)
+    const viewHelperPath = path.join(__dirname, '..', app.locals.helperPath, 'view_helper')
+    console.debug(`Loading view helper from: ${viewHelperPath}`)
+    const viewHelper = require(viewHelperPath)(app)
 
     const currentRouteName = path.basename(__filename, '.js')
 

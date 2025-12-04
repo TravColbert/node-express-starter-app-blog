@@ -127,7 +127,7 @@ module.exports = function (app) {
     setDescription: function (req, res, next) {
       app.locals.debug && console.debug('Setting description')
       res.locals.render.description = [
-        (app.locals.appDescription || pkg?.description || 'Node.js Express Mongoose Starter'),
+        (app.locals.appDescription || 'Node.js Express Mongoose Starter'),
         res.locals.render.description
       ].filter(element => { return (element || element?.trim() != "") }).join(' - ')
       return next()
@@ -135,7 +135,7 @@ module.exports = function (app) {
     setKeywords: function (req, res, next) {
       app.locals.debug && console.debug('Setting keywords')
       res.locals.render.keywords = [
-        (app.locals.appKeywords || pkg?.keywords || 'Node.js, Express, Mongoose, Starter'),
+        (app.locals.appKeywords || 'Node.js, Express, Mongoose, Starter'),
         res.locals.render.keywords
       ].filter(element => { return (element || element?.trim() != "") }).join(',')
       return next()

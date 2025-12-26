@@ -362,6 +362,7 @@ article img {
 
 article .content p,
 article .content li {
+  text-align: justify;
   hyphens: auto;
 }
 

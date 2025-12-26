@@ -17,7 +17,8 @@
 
   --aside-width-desktop: 300px;
 
-  --body-font-family: 'Source Code Pro', monospace, 'Source Sans Pro', sans-serif;
+  --body-font-family:
+    "Source Code Pro", monospace, "Source Sans Pro", sans-serif;
 
   --body-font-size: 18px;
   --body-font-size-secondary: 16px;
@@ -69,35 +70,42 @@ body {
   max-height: 100vh;
   display: grid;
   grid:
-    ". header ." 2rem ". main ." 1fr ". footer ." 2rem / auto var(--main-width-desktop) auto;
+    ". header ." 2rem ". main ." 1fr ". footer ." 2rem / auto var(
+      --main-width-desktop
+    )
+    auto;
   gap: 0;
   box-sizing: border-box;
 }
 
-.layout>* {
+.layout > * {
   padding: 0 var(--body-padding);
 }
 
-body>header {
+body > header {
   grid-area: header;
   font-size: larger;
 }
 
-body>main {
+body > main {
   grid-area: main;
   max-width: 100%;
   display: grid;
   grid:
-    "section-header section-header" auto "article aside" 1fr / calc(var(--main-width-desktop) - (var(--aside-width-desktop) + (3 * var(--body-padding)))) var(--aside-width-desktop);
+    "section-header section-header" auto "article aside" 1fr / calc(
+      var(--main-width-desktop) -
+        (var(--aside-width-desktop) + (3 * var(--body-padding)))
+    )
+    var(--aside-width-desktop);
   gap: var(--body-padding);
 }
 
-body>footer {
+body > footer {
   grid-area: footer;
 }
 
-body>header,
-body>footer {
+body > header,
+body > footer {
   display: flex;
   flex-direction: row;
 }
@@ -108,13 +116,11 @@ body>footer {
   }
 
   .layout {
-    grid:
-      "header" auto "main" 1fr "footer" auto / 100vw;
+    grid: "header" auto "main" 1fr "footer" auto / 100vw;
   }
 
-  body>main {
-    grid:
-      "section-header" auto "article" 1fr / 100%;
+  body > main {
+    grid: "section-header" auto "article" 1fr / 100%;
   }
 
   aside {
@@ -143,15 +149,15 @@ body>footer {
 /**
  * Section grid layout
  */
-.section-layout>header {
+.section-layout > header {
   grid-area: section-header;
 }
 
-.section-layout>article {
+.section-layout > article {
   grid-area: article;
 }
 
-.section-layout>aside {
+.section-layout > aside {
   grid-area: aside;
 }
 
@@ -166,8 +172,8 @@ body>footer {
   font-size: larger;
 }
 
-body>header nav,
-body>footer nav {
+body > header nav,
+body > footer nav {
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -175,22 +181,22 @@ body>footer nav {
   justify-content: space-between;
 }
 
-body>header nav ul,
-body>footer nav ul {
+body > header nav ul,
+body > footer nav ul {
   display: flex;
   flex: 1;
   justify-content: flex-end;
 }
 
-body>header nav ul li,
-body>footer nav ul li {
+body > header nav ul li,
+body > footer nav ul li {
   margin-right: var(--body-padding);
   list-style: none;
 }
 
-body>header nav ul li:last-child,
-body>footer nav ul li:last-child {
-  margin-right: 0
+body > header nav ul li:last-child,
+body > footer nav ul li:last-child {
+  margin-right: 0;
 }
 
 /* FOR THE ASIDE PAGE ELEMENT */
@@ -354,6 +360,11 @@ article img {
   border-radius: 0.33em;
 }
 
+article .content p,
+article .content li {
+  hyphens: auto;
+}
+
 h3.article {
   line-height: var(--body-line-height-tertiary);
 }
@@ -368,20 +379,20 @@ ul p {
   display: inline;
 }
 
-p>code,
-li>code,
-dd>code,
-td>code {
+p > code,
+li > code,
+dd > code,
+td > code {
   background: #ffeff0;
   word-wrap: break-word;
   box-decoration-break: clone;
-  padding: .1rem .3rem .2rem;
-  border-radius: .5rem;
+  padding: 0.1rem 0.3rem 0.2rem;
+  border-radius: 0.5rem;
   font-weight: 600;
   text-shadow: 1px 1px 2px pink;
 }
 
-pre>code {
+pre > code {
   display: contents;
   padding: 1.33em;
   border-radius: 0.33em;
